@@ -8,6 +8,8 @@ A Christmas list tool built using React ([Create React App](https://create-react
 
 ## Screenshot
 
+![My Christmas List Screenshot](../media/my-christmas-list-screenshot.png?raw=true)
+
 ## Technologies Used:
 
 - [Create React App](https://create-react-app.dev/)
