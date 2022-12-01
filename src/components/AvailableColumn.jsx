@@ -38,6 +38,7 @@ const AvailableColumn = ({ availableItems, handleAddItem }) => {
           label="Filter"
           variant="standard"
           onChange={(event) => handleFilterAvailableItems(event)}
+          disabled={availableItemsFiltered.length === 0}
         />
         {availableItemsFiltered.length === 0 ? (
           <>
