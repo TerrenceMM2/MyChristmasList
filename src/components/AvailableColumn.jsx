@@ -39,19 +39,27 @@ const AvailableColumn = ({ availableItems, handleAddItem }) => {
           variant="standard"
           onChange={(event) => handleFilterAvailableItems(event)}
         />
-        {availableItemsFiltered.map((item) => (
+        {availableItemsFiltered.length === 0 ? (
           <>
-            <Typography key={`${item.itemName}-available`} variant="body1">
-              {item.icon} {item.itemName}
-              <IconButton
-                color="success"
-                aria-label={`remove-${item.itemName}`}
-                onClick={() => handleAddItem(item)}>
-                <AddIcon />
-              </IconButton>
+            <Typography sx={{ textAlign: "center " }} variant="h2">
+              No items available.
             </Typography>
           </>
-        ))}
+        ) : (
+          <Box sx={{ maxHeight: 500, overflowY: "auto" }}>
+            {availableItemsFiltered.map((item) => (
+              <Typography key={`${item.itemName}-available`} variant="body1">
+                {item.icon} {item.itemName}
+                <IconButton
+                  color="success"
+                  aria-label={`remove-${item.itemName}`}
+                  onClick={() => handleAddItem(item)}>
+                  <AddIcon />
+                </IconButton>
+              </Typography>
+            ))}
+          </Box>
+        )}
       </Box>
     </>
   );

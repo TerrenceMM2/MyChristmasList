@@ -41,7 +41,7 @@ const ListContainer = () => {
   };
 
   return (
-    <Grid container sx={{ marginTop: "1rem" }}>
+    <Grid container sx={{ marginTop: "1rem" }} columnSpacing={5}>
       <Grid item xs={12} sm={6}>
         <AvailableColumn
           availableItems={availableItems}

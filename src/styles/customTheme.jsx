@@ -5,6 +5,9 @@ const customTheme = createTheme({
     h1: {
       fontSize: "3rem",
     },
+    h2: {
+      fontSize: "2rem",
+    },
   },
 });
 

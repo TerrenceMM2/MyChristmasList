@@ -37,20 +37,29 @@ const AddedColumn = ({ addedItems, handleDeleteItem }) => {
           label="Filter"
           variant="standard"
           onChange={(event) => handleFilterAddedItems(event)}
+          disabled={addedItemsFiltered.length === 0}
         />
-        {addedItemsFiltered.map((item) => (
+        {addedItemsFiltered.length === 0 ? (
           <>
-            <Typography key={`${item.itemName}-added`} variant="body1">
-              {item.icon} {item.itemName}
-              <IconButton
-                color="error"
-                aria-label={`remove-${item.itemName}`}
-                onClick={() => handleDeleteItem(item)}>
-                <RemoveIcon />
-              </IconButton>
+            <Typography sx={{ textAlign: "center " }} variant="h2">
+              No items added.
             </Typography>
           </>
-        ))}
+        ) : (
+          <Box sx={{ maxHeight: 500, overflowY: "auto" }}>
+            {addedItemsFiltered.map((item) => (
+              <Typography key={`${item.itemName}-added`} variant="body1">
+                {item.icon} {item.itemName}
+                <IconButton
+                  color="error"
+                  aria-label={`remove-${item.itemName}`}
+                  onClick={() => handleDeleteItem(item)}>
+                  <RemoveIcon />
+                </IconButton>
+              </Typography>
+            ))}
+          </Box>
+        )}
       </Box>
     </>
   );
