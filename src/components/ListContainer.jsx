@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 
 // MUI Components
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
 // Custom Components
@@ -11,7 +11,7 @@ import AvailableColumn from "./AvailableColumn";
 // Data
 import itemData from "data/itemData";
 
-const ListContainer = (props) => {
+const ListContainer = () => {
   const [addedItems, setAddedItems] = useState([]);
   const [availableItems, setAvailableItems] = useState(itemData);
 
@@ -41,7 +41,7 @@ const ListContainer = (props) => {
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ marginTop: "1rem" }}>
       <Grid item xs={12} sm={6}>
         <AvailableColumn
           availableItems={availableItems}
@@ -54,10 +54,30 @@ const ListContainer = (props) => {
           handleDeleteItem={handleDeleteItem}
         />
       </Grid>
+      <Grid container direction="row" justifyContent="space-around">
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => {
+            setAvailableItems([]);
+            setAddedItems(itemData);
+          }}
+          size="large">
+          Add All
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => {
+            setAddedItems([]);
+            setAvailableItems(itemData);
+          }}
+          size="large">
+          Remove All
+        </Button>
+      </Grid>
     </Grid>
   );
 };
-
-ListContainer.propTypes = {};
 
 export default ListContainer;
