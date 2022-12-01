@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+// MUI Components
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-const AddedColumn = ({ addedItems, setAddedItems }) => {
-  const [addedItemsFiltered, setAddedItemsFiltered] = useState(addedItems);
+// MUI Icons
+import RemoveIcon from "@mui/icons-material/Remove";
+
+const AddedColumn = ({ addedItems, handleDeleteItem }) => {
+  const [addedItemsFiltered, setAddedItemsFiltered] = useState([]);
 
   const handleFilterAddedItems = (event) => {
     const value = event.target.value;
@@ -16,6 +21,10 @@ const AddedColumn = ({ addedItems, setAddedItems }) => {
     );
     setAddedItemsFiltered(filteredItems);
   };
+
+  useEffect(() => {
+    setAddedItemsFiltered(addedItems);
+  }, [addedItems]);
 
   return (
     <>
@@ -33,6 +42,12 @@ const AddedColumn = ({ addedItems, setAddedItems }) => {
           <>
             <Typography key={`${item.itemName}-added`} variant="body1">
               {item.icon} {item.itemName}
+              <IconButton
+                color="error"
+                aria-label={`remove-${item.itemName}`}
+                onClick={() => handleDeleteItem(item)}>
+                <RemoveIcon />
+              </IconButton>
             </Typography>
           </>
         ))}
@@ -43,7 +58,7 @@ const AddedColumn = ({ addedItems, setAddedItems }) => {
 
 AddedColumn.propTypes = {
   addedItems: PropTypes.array,
-  setAddedItems: PropTypes.func,
+  handleDeleteItem: PropTypes.func,
 };
 
 export default AddedColumn;

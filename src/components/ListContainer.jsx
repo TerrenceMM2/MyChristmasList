@@ -12,22 +12,46 @@ import AvailableColumn from "./AvailableColumn";
 import itemData from "data/itemData";
 
 const ListContainer = (props) => {
-  const [items, setItems] = useState(itemData);
   const [addedItems, setAddedItems] = useState([]);
-  const [availableItems, setAvailableItems] = useState(items);
+  const [availableItems, setAvailableItems] = useState(itemData);
+
+  const handleAddItem = (item) => {
+    const updatedAddedArr = [...addedItems];
+    updatedAddedArr.push(item);
+    setAddedItems(updatedAddedArr);
+
+    const updatedAvailableArrCopy = [...availableItems];
+    const updatedAvailableArr = updatedAvailableArrCopy.filter(
+      (obj) => obj.id !== item.id
+    );
+    setAvailableItems(updatedAvailableArr);
+  };
+
+  const handleDeleteItem = (item) => {
+    const updatedAvailableArrCopy = [...availableItems];
+    const index = item.id - 1;
+    updatedAvailableArrCopy.splice(index, 0, item);
+    setAvailableItems(updatedAvailableArrCopy);
+
+    const updatedAddedArrCopy = [...addedItems];
+    const updatedAddedArr = updatedAddedArrCopy.filter(
+      (obj) => obj.id !== item.id
+    );
+    setAddedItems(updatedAddedArr);
+  };
 
   return (
     <Grid container>
       <Grid item xs={12} sm={6}>
         <AvailableColumn
           availableItems={availableItems}
-          setAvailableItems={setAvailableItems}
+          handleAddItem={handleAddItem}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
         <AddedColumn
           addedItems={addedItems}
-          setAvailableItems={setAvailableItems}
+          handleDeleteItem={handleDeleteItem}
         />
       </Grid>
     </Grid>

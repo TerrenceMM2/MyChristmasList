@@ -25,7 +25,7 @@ const items = [
     icon: "📘",
   },
   {
-    id: 8,
+    id: 6,
     itemName: "Underwear",
     icon: "🩲",
   },
@@ -45,12 +45,12 @@ const items = [
     icon: "💻",
   },
   {
-    id: 11,
+    id: 10,
     itemName: "TV",
     icon: "📺",
   },
   {
-    id: 12,
+    id: 11,
     itemName: "Tools",
     icon: "🛠️",
   },

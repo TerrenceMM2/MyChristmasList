@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+// MUI Components
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-const AvailableColumn = ({ availableItems, setAvailableItems }) => {
+// MUI Icons
+import AddIcon from "@mui/icons-material/Add";
+
+const AvailableColumn = ({ availableItems, handleAddItem }) => {
   const [availableItemsFiltered, setAvailableItemsFiltered] =
     useState(availableItems);
 
@@ -17,6 +22,10 @@ const AvailableColumn = ({ availableItems, setAvailableItems }) => {
     );
     setAvailableItemsFiltered(filteredItems);
   };
+
+  useEffect(() => {
+    setAvailableItemsFiltered(availableItems);
+  }, [availableItems]);
 
   return (
     <>
@@ -34,6 +43,12 @@ const AvailableColumn = ({ availableItems, setAvailableItems }) => {
           <>
             <Typography key={`${item.itemName}-available`} variant="body1">
               {item.icon} {item.itemName}
+              <IconButton
+                color="success"
+                aria-label={`remove-${item.itemName}`}
+                onClick={() => handleAddItem(item)}>
+                <AddIcon />
+              </IconButton>
             </Typography>
           </>
         ))}
@@ -44,7 +59,7 @@ const AvailableColumn = ({ availableItems, setAvailableItems }) => {
 
 AvailableColumn.propTypes = {
   availableItems: PropTypes.array,
-  setAvailableItems: PropTypes.func,
+  handleAddItem: PropTypes.func,
 };
 
 export default AvailableColumn;
