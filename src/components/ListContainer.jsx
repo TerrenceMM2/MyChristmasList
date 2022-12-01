@@ -54,7 +54,11 @@ const ListContainer = () => {
           handleDeleteItem={handleDeleteItem}
         />
       </Grid>
-      <Grid container direction="row" justifyContent="space-around">
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        sx={{ marginTop: "2rem" }}>
         <Button
           variant="contained"
           color="success"
